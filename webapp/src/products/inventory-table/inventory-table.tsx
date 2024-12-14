@@ -80,7 +80,6 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
               <TableCell className="text-left">
                 {item.warehouse.location}
               </TableCell>
-              {/* <TableCell><Input{item.quantityInStock}</TableCell> */}
               <TableCell>
                 <div className="flex">
                   <Input
@@ -100,7 +99,6 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
                         ),
                       })
                     }
-                    // onChange={handleChange}
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                   />
                   <Button
