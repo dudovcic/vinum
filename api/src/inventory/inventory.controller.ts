@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
-import { PrismaService } from 'src/database';
+import { PrismaService } from '../database';
 
 @Controller('inventory')
 export class InventoryController {

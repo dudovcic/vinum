@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PurchaseOrderStatus } from '@prisma/client';
 import { addDays } from 'date-fns';
-import { PrismaService } from 'src/database';
+import { PrismaService } from '../database';
 
 @Injectable()
 export class InventoryService {
