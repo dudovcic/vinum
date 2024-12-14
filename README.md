@@ -26,7 +26,7 @@ $ npm install
 ## Run services
 
 ```bash
-# API
+# API runs on port 4000 by default
 $ cd api
 $ npm run start
 
