@@ -1,0 +1,85 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Supplier {
+  id           String @id @default(uuid())
+  name         String
+  contactEmail String
+  contactPhone String
+
+  products       Product[]
+  purchaseOrders PurchaseOrder[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Warehouse {
+  id               String             @id @default(uuid())
+  name             String
+  location         String
+  capacity         Int
+  currentOccupancy Int                @default(0)
+  products         ProductWarehouse[]
+  purchaseOrders   PurchaseOrder[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id   String @id @default(uuid())
+  sku  String @unique
+  name String
+
+  description       String?
+  reorderThreshold  Int
+  defaultSupplierId String
+  defaultSupplier   Supplier           @relation(fields: [defaultSupplierId], references: [id])
+  inventoryItems    ProductWarehouse[]
+  purchaseOrders    PurchaseOrder[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductWarehouse {
+  productId   String
+  product     Product   @relation(fields: [productId], references: [id])
+  warehouseId String
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+
+  quantityInStock Int @default(0)
+
+  @@id([productId, warehouseId])
+}
+
+model PurchaseOrder {
+  id          String    @id @default(uuid())
+  productId   String
+  product     Product   @relation(fields: [productId], references: [id])
+  supplierId  String
+  supplier    Supplier  @relation(fields: [supplierId], references: [id])
+  warehouseId String
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+
+  quantityOrdered     Int
+  orderDate           DateTime            @default(now())
+  expectedArrivalDate DateTime
+  status              PurchaseOrderStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PurchaseOrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
