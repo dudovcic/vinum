@@ -1,12 +1,8 @@
-## TODO: more tests
-
 # System
 
-### Contains a webapp and an api which has a cron scheduler that will resorder stock every midnight, scheduler could potentially be a separate service.
-
-### Once a purchase order is created and checks pass, it will be with status pending at first, once the order has arrived there should be a request to the API to update its status to COMPLETED
-
-### Every midnight the scheduler checks if quantity in stock is equal to or below threshold which then triggers reorder.
+Contains a webapp and an api which has a cron scheduler that will resorder stock every midnight, scheduler could potentially be a separate service.
+Once a purchase order is created and checks pass, it will be with status pending at first, once the order has arrived there should be a request to the API to update its status to COMPLETED
+Every midnight the scheduler checks if quantity in stock is equal to or below threshold which then triggers reorder.
 
 ## Project setup
 
